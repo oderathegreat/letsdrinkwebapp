@@ -139,7 +139,7 @@
 		
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="name"
-														placeholder="{{ $langg->lang152 }}" required=""
+														placeholder="First Name" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->name : '' }}">
 												</div>
 
@@ -760,12 +760,12 @@
 
 						{{-- Shipping Method Area Start --}}
 						<div class="packeging-area">
-								<h4 class="title">{{ $langg->lang765 }}</h4>
+								<!-- <h4 class="title">{{ $langg->lang765 }}</h4> -->
 
 							@foreach($shipping_data as $data)
 						
 								<div class="radio-design">
-										<input type="radio" class="shipping" id="free-shepping{{ $data->id }}" name="shipping" value="{{ round($data->price * $curr->value,2) }}" {{ ($loop->first) ? 'checked' : '' }}> 
+										<!-- <input type="radio" class="shipping" id="free-shepping{{ $data->id }}" name="shipping" value="{{ round($data->price * $curr->value,2) }}" {{ ($loop->first) ? 'checked' : '' }}> 
 										<span class="checkmark"></span>
 										<label for="free-shepping{{ $data->id }}"> 
 												{{ $data->title }}
@@ -773,7 +773,7 @@
 												+ {{ $curr->sign }}{{ round($data->price * $curr->value,2) }}
 												@endif
 												<small>{{ $data->subtitle }}</small>
-										</label>
+										</label> -->
 								</div>
 
 							@endforeach		
@@ -783,12 +783,12 @@
 
 						{{-- Packeging Area Start --}}
 						<div class="packeging-area">
-								<h4 class="title">{{ $langg->lang766 }}</h4>
+								<!-- <h4 class="title">{{ $langg->lang766 }}</h4> -->
 
 							@foreach($package_data as $data)	
 
 								<div class="radio-design">
-										<input type="radio" class="packing" id="free-package{{ $data->id }}" name="packeging" value="{{ round($data->price * $curr->value,2) }}" {{ ($loop->first) ? 'checked' : '' }}> 
+										<!-- <input type="radio" class="packing" id="free-package{{ $data->id }}" name="packeging" value="{{ round($data->price * $curr->value,2) }}" {{ ($loop->first) ? 'checked' : '' }}> 
 										<span class="checkmark"></span>
 										<label for="free-package{{ $data->id }}"> 
 												{{ $data->title }}
@@ -796,7 +796,7 @@
 												+ {{ $curr->sign }}{{ round($data->price * $curr->value,2) }}
 												@endif
 												<small>{{ $data->subtitle }}</small>
-										</label>
+										</label> -->
 								</div>
 
 							@endforeach	
