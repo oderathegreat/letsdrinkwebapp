@@ -5759,6 +5759,7 @@ Logo Header Area Start
 --------------------------*/
 .logo-header {
   padding: 20px 0px 20px;
+  background:#050503 !important;
   }
   .logo-header .search-box {
     height: 50px;
@@ -13050,6 +13051,8 @@ margin-bottom: 15px;
 }
 .logo-header .search-box .categori-container .categoris {
     width: 100%;
+
+    
 }
 
 /* category page */

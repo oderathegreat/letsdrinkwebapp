@@ -142,6 +142,14 @@
 														placeholder="{{ $langg->lang152 }}" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->name : '' }}">
 												</div>
+
+
+												<div class="col-lg-6">
+													<input class="form-control" type="text" name="name"
+														placeholder="Last Name" required=""
+														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->address : '' }}">
+												</div>
+
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="phone"
 														placeholder="{{ $langg->lang153 }}" required=""
@@ -154,23 +162,23 @@
 												</div>
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="address"
-														placeholder="{{ $langg->lang155 }}" required=""
+														placeholder="Street Address" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->address : '' }}">
 												</div>
 												<div class="col-lg-6">
-													<select class="form-control" name="customer_country" required="">
+													<!-- <select class="form-control" name="customer_country" required="">
 														@include('includes.countries')
-													</select>
+													</select> -->
 												</div>
-												<div class="col-lg-6">
+												<!-- <div class="col-lg-6">
 													<input class="form-control" type="text" name="city"
 														placeholder="{{ $langg->lang158 }}" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->city : '' }}">
-												</div>
+												</div> -->
 												<div class="col-lg-6">
-													<input class="form-control" type="text" name="zip"
+													<!-- <input class="form-control" type="text" name="zip"
 														placeholder="{{ $langg->lang159 }}" required=""
-														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->zip : '' }}">
+														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->zip : '' }}"> -->
 												</div>
 											</div>
 										</div>
@@ -198,7 +206,7 @@
 											<div class="row">
 												<div class="col-lg-6">
 													<input class="form-control ship_input" type="text" name="shipping_address"
-														id="shipping_address" placeholder="{{ $langg->lang155 }}">
+														id="shipping_address" placeholder="Street Name">
 												</div>
 
 												<div class="col-lg-6">
@@ -212,10 +220,10 @@
 													<input class="form-control ship_input" type="text" name="shipping_city"
 														id="shipping_city" placeholder="{{ $langg->lang158 }}">
 												</div>
-												<div class="col-lg-6">
+												<!-- <div class="col-lg-6">
 													<input class="form-control ship_input" type="text" name="shipping_zip"
 														id="shippingPostal_code" placeholder="{{ $langg->lang159 }}">
-												</div>
+												</div> -->
 
 											</div>
 
@@ -937,7 +945,7 @@
                             </div>
 
                             <div class="form-input">
-                                <input type="text" class="User Name" name="address" placeholder="{{ $langg->lang185 }}" required="">
+                                <input type="text" class="User Name" name="address" placeholder="Street Name" required="">
                                 <i class="icofont-location-pin"></i>
                             </div>
 
