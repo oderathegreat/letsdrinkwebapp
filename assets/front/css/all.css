@@ -5809,6 +5809,7 @@ Logo Header Area Start
       position: relative; }
       .logo-header .search-box .search-form input {
         height: 50px;
+        background: #FFF !IMPORTANT;
         width: 100%;
         border-radius: 0px 50px 50px 0px;
         border: 0px;
