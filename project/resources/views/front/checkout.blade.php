@@ -91,6 +91,8 @@
 										<div class="personal-info">
 											<h5 class="title">
 												{{ $langg->lang746 }} :
+
+
 											</h5>
 											<div class="row">
 												<div class="col-lg-6">
@@ -130,21 +132,21 @@
 												</div>
 		
 												<div class="col-lg-6 d-none" id="shipshow">
-													<select class="form-control nice" name="pickup_location">
+													<select class="form-control nice" name="pickup_location" id="pickup_location">
 														@foreach($pickups as $pickup)
-														<option value="{{$pickup->location}}">{{$pickup->location}}</option>
+														   <option value="{{$pickup->location}}" data-price="{{$pickup->price?$pickup->price:100}}" data-location="{{$pickup->location}}">{{$pickup->location}}</option>
 														@endforeach
 													</select>
 												</div>
 		
-												<div class="col-lg-6">
+												<div class="col-lg-6 mt-1">
 													<input class="form-control" type="text" name="name"
 														placeholder="First Name" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->name : '' }}">
 												</div>
 
 
-												<div class="col-lg-6">
+												<div class="col-lg-6 mt-1">
 													<input class="form-control" type="text" name="name"
 														placeholder="Last Name" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->address : '' }}">
@@ -152,9 +154,10 @@
 
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="phone"
-														placeholder="{{ $langg->lang153 }}" required=""
+														placeholder="MPESA Phone Number" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->phone : '' }}">
 												</div>
+
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="email"
 														placeholder="{{ $langg->lang154 }}" required=""
@@ -162,7 +165,7 @@
 												</div>
 												<div class="col-lg-6">
 													<input class="form-control" type="text" name="address"
-														placeholder="Street Address" required=""
+														placeholder="Street / Estate Name" required=""
 														value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->address : '' }}">
 												</div>
 												<div class="col-lg-6">
@@ -498,6 +501,7 @@
 																	<div class="icon">
 																			<span class="radio"></span>
 																	</div>
+																  dddd
 																	<p>
 																			{{ $langg->lang802 }}
 
@@ -659,9 +663,19 @@
 								{{ $langg->lang128 }}
 							</p>
 							<P>
-								<b
-								class="cart-total">{{ Session::has('cart') ? App\Models\Product::convertPrice(Session::get('cart')->totalPrice) : '0.00' }}</b>
+								<b class="cart-total">{{ Session::has('cart') ? App\Models\Product::convertPrice(Session::get('cart')->totalPrice) : '0.00' }}</b>
 							</P>
+
+							</li>
+
+							<li>
+								<p id="pickup-destination">
+
+								</p>
+								<P>
+									<b class="cart-total" id="pickup-total-cost"></b>
+								</P>
+
 							</li>
 
 							@if($gs->tax != 0)
@@ -734,7 +748,7 @@
 						@elseif(Session::has('coupon_total1'))
 							<span id="total-cost"> {{ Session::get('coupon_total1') }}</span>
 							@else
-							<span id="total-cost">{{ App\Models\Product::convertPrice($totalPrice) }}</span>
+							<span id="total-cost" class="v-total-cost" data-cost="{{App\Models\Product::convertPrice($totalPrice)}}">{{ App\Models\Product::convertPrice($totalPrice) }}</span>
 						@endif
 
 		              </p>
@@ -817,7 +831,7 @@
 						@elseif(Session::has('coupon_total1'))
 							<span id="final-cost"> {{ Session::get('coupon_total1') }}</span>
 							@else
-							<span id="final-cost">{{ App\Models\Product::convertPrice($totalPrice) }}</span>
+							<span id="final-cost" class="v-final-cost" data-final="{{ App\Models\Product::convertPrice($totalPrice) }}">{{ App\Models\Product::convertPrice($totalPrice) }}</span>
 						@endif
 
 
@@ -940,7 +954,7 @@
                             </div>
 
                             <div class="form-input">
-                                <input type="text" class="User Name" name="phone" placeholder="{{ $langg->lang184 }}" required="">
+                                <input type="text" class="User Name" name="phone" placeholder="M-PESA Phone Number" required="">
                                 <i class="icofont-phone"></i>
                             </div>
 
@@ -1312,6 +1326,24 @@ var ck = 0;
 		  
 	})
 
+
+	$(function(){
+		$('#pickup_location').change(function(){
+			var selected = $(this).find('option:selected');
+			var price = selected.data('price');
+			var location = selected.data('location');
+			var total_cost = $('.v-total-cost').data('cost').toLowerCase().replace("kshs","");
+			var final_cost = $('.v-final-cost').data('final').toLowerCase().replace("kshs","");
+			//class="v-final-cost" data-final
+
+			$('#pickup-destination').text('Shipping cost to '+location);
+			$('#pickup-total-cost').text("Ksh"+price);
+			console.log(total_cost);
+			$('.v-total-cost').text("Ksh"+(parseInt(price)+parseInt(total_cost)));
+			$('.v-final-cost').text("Ksh"+(parseInt(price)+parseInt(final_cost)));
+
+		});
+	});
 
         $(document).on('submit','#step1-form',function(){
         	$('#preloader').hide();

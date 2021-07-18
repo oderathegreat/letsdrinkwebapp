@@ -46,6 +46,7 @@ class PickupController extends Controller
         //--- Validation Section
         $rules = [
                'location' => 'unique:pickups',
+               'price'=>'required',
                 ];
         $customs = [
                'location.unique' => 'This location has already been taken.',
@@ -80,7 +81,8 @@ class PickupController extends Controller
     {
         //--- Validation Section
         $rules = [
-               'location' => 'unique:pickups,location,'.$id
+               'location' => 'unique:pickups,location,'.$id,
+                'price'=>'required'
                 ];
         $customs = [
                'location.unique' => 'This location has already been taken.',

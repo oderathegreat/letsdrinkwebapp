@@ -22,13 +22,21 @@
 													<div class="col-lg-7">
 														<input type="text" class="input-field" name="location" placeholder="{{ __('Location') }}" required="" value="">
 													</div>
+												</div>
 
-													<h4 class="heading">Enter Price *</h4>
-
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Price *</h4>
+															<p class="sub-heading"></p>
+														</div>
+													</div>
 													<div class="col-lg-7">
-														<input type="text" class="input-field" name="price" placeholder="Estimated Price" required="" value="">
+														<input type="text" class="input-field" name="price" placeholder="Charges" required="" value="0">
 													</div>
 												</div>
+
+
 
 
 												<div class="row">

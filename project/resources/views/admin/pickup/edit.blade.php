@@ -22,6 +22,18 @@
 													</div>
 												</div>
 
+												<div class="row">
+													<div class="col-lg-4">
+														<div class="left-area">
+															<h4 class="heading">Price *</h4>
+															<p class="sub-heading"></p>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<input type="number" class="input-field" name="price" placeholder="Price" required="" value="{{$data->price}}">
+													</div>
+												</div>
+
 
 												<div class="row">
 													<div class="col-lg-4">

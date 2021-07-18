@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pickup extends Model
 {
-    protected $fillable = ['location'];
+    protected $fillable = ['location','price'];
     public $timestamps = false;
 }
