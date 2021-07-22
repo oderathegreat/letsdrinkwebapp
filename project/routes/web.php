@@ -1314,6 +1314,7 @@ Route::get('/package/delete/{id}', 'Vendor\PackageController@destroy')->name('ve
   Route::post('/instamojo/submit', 'Front\InstamojoController@store')->name('instamojo.submit');
   Route::post('/paypal-submit', 'Front\PaymentController@store')->name('paypal.submit');
   Route::post('/stripe-submit', 'Front\StripeController@store')->name('stripe.submit');
+  Route::post('/mobile-payment-submit', 'Front\CheckoutController@makeMobilePayment')->name('mpesa.submit');
 
 
   // Molly Routes

@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+Route::post('/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push',"Front\MpesaCallbacksController@receivePayment");
+Route::post('/status/stk-push',"Front\MpesaCallbacksController@statusCheck");

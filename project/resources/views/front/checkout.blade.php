@@ -133,7 +133,9 @@
 		
 												<div class="col-lg-6 d-none" id="shipshow">
 													<select class="form-control nice" name="pickup_location" id="pickup_location">
-														@foreach($pickups as $pickup)
+														<option selected="true" disabled="disabled">Select A Pickup Location</option>
+
+													   @foreach($pickups as $pickup)
 														   <option value="{{$pickup->location}}" data-price="{{$pickup->price?$pickup->price:100}}" data-location="{{$pickup->location}}">{{$pickup->location}}</option>
 														@endforeach
 													</select>
@@ -501,7 +503,6 @@
 																	<div class="icon">
 																			<span class="radio"></span>
 																	</div>
-																  dddd
 																	<p>
 																			{{ $langg->lang802 }}
 
@@ -527,6 +528,7 @@
 																			<span class="radio"></span>
 																	</div>
 																	<p>
+                                                                          {{--Mobile money--}}
 																			{{ $gt->title }}
 
 																		@if($gt->subtitle != null)
@@ -1009,6 +1011,8 @@
 @section('scripts')
 
 <script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 
 <script type="text/javascript">
@@ -1327,6 +1331,7 @@ var ck = 0;
 	})
 
 
+
 	$(function(){
 		$('#pickup_location').change(function(){
 			var selected = $(this).find('option:selected');
@@ -1338,10 +1343,10 @@ var ck = 0;
 
 			$('#pickup-destination').text('Shipping cost to '+location);
 			$('#pickup-total-cost').text("Ksh"+price);
+			$('#shipping-cost').val(price);
 			console.log(total_cost);
 			$('.v-total-cost').text("Ksh"+(parseInt(price)+parseInt(total_cost)));
 			$('.v-final-cost').text("Ksh"+(parseInt(price)+parseInt(final_cost)));
-
 		});
 	});
 

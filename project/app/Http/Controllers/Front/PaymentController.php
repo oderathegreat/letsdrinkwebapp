@@ -127,7 +127,7 @@ class PaymentController extends Controller
                     $order['cart'] = utf8_encode(bzcompress(serialize($cart), 9));
                     $order['totalQty'] = $request->totalQty;
                     $order['pay_amount'] = round($item_amount / $curr->value, 2);
-                    $order['method'] = $request->method;
+                    $order['method'] = $request->input("method");
                     $order['customer_email'] = $request->email;
                     $order['customer_name'] = $request->name;
                     $order['customer_phone'] = $request->phone;

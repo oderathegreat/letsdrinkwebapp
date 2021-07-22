@@ -116,10 +116,31 @@
 
 
 <div class="col-lg-6">
-	<label>{{ $langg->lang167 }} *</label>
-	<input class="form-control" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"  />
+	<label class="d-none">{{ $langg->lang167 }} *</label>
+	<input class="form-control d-none" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"  />
+
+    	<label>MPESA Number to pay </label>
+    	<input class="form-control" id="mpesa_phone" name="mpesa_phone" type="tel" placeholder="0723 xxx xxx"  />
+        <button class="btn btn-success" id="mpesa-btn">Initiate Mpesa Payment</button>
 </div>
 
 
   </div>
+    <script>
+        $(function(){
+            $('#mpesa-btn').on('click', function () {
+                var phone =$('#mpesa_phone').val();
+                var total =$('.v-total-cost').data('cost').toLowerCase().replace("kshs","");
+                var shipping =$('#shipping-cost').val();
+                console.log(phone, total, shipping)
+                axios.post('/mobile-payment-submit',{'phone':phone, 'total':total, 'shipping_cost':shipping })
+                .then((response)=>{
+                    console.log(response)
+                })
+                .catch((error)=>{
+                    console.log(error)
+                });
+            });
+        });
+    </script>
 @endif
