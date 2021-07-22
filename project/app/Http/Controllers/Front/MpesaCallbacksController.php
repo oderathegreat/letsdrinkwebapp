@@ -35,7 +35,10 @@ class MpesaCallbacksController extends Controller
                 $payment->fill(["transactionDate"=>$transactionDate,"mpesaCode"=>$mpesaCode,"completed"=>true]);
             }
         }
-        //return ["merchantRequestID" => "It works"];
+        return $resultArray=[
+                "ResultDesc"=>"Confirmation Service request accepted successfully",
+                "ResultCode"=>"0"
+            ];
     }
 
     public function statusCheck(Request $request)
