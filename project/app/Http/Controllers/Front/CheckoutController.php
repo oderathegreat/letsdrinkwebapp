@@ -552,7 +552,6 @@ class CheckoutController extends Controller
 
         $input = $request->all();
 
-        dd($input);
 
         $rules = [
             'txn_id4' => 'required',

@@ -46,7 +46,7 @@ class MpesaCallbacksController extends Controller
         $merchantRequestID =$request->merchantRequestID;
         $payment =Payment::where(["merchantRequestID"=>$merchantRequestID,"completed"=>true])->first();
         if ($payment){
-            return ["status" => "Completed"];
+            return ["status" => "Completed", "code"=>$payment->mpesaCode];
         }else{
             return ["status" => "Processing"];
         }
