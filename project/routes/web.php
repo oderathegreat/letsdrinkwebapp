@@ -1320,6 +1320,7 @@ Route::get('/package/delete/{id}', 'Vendor\PackageController@destroy')->name('ve
   Route::post('/6fc8fca0c81a9d449c4fb555201c0c0b/process',"Front\MpesaCallbacksController@receivePayment");
   Route::post('/status/stk-push',"Front\MpesaCallbacksController@statusCheck");
   //check transaction status
+  Route::post('/6fc8fca0c81a9d449c4fb555201c0c0b/status',"Front\CheckoutController@transactionStatus");
   Route::post('/mobile/transaction-status-result',"Front\MpesaCallbacksController@manualStatusCheck");
   Route::post('/mobile/transaction-status-timeout',"Front\MpesaCallbacksController@manualStatusCheck");
 
