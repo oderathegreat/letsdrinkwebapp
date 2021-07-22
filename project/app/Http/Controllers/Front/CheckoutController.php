@@ -839,7 +839,7 @@ class CheckoutController extends Controller
             "PartyA" => $phone,//"254708374149",
             "PartyB" => env('MPESA_STK_SHORTCODE'),
             "PhoneNumber" => $phone,
-            "CallBackURL" => env("MPESA_BASE_URL") . "/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push",
+            "CallBackURL" => env("MPESA_BASE_URL") . "/6fc8fca0c81a9d449c4fb555201c0c0b/process",
             "AccountReference" => $orderNumber,
             "TransactionDesc" => $orderNumber
         );
@@ -855,6 +855,24 @@ class CheckoutController extends Controller
             $phoneNumber = "254".Str::substr($phoneNumber,1);
       }
       return $phoneNumber;
+    }
+
+    public function transactionStatus(Request $request)
+    {
+        $url = env('MPESA_ENV') == 0 ? "https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query" : "https://api.safaricom.co.ke/mpesa/transactionstatus/v1/query";
+        $body = array(
+            "Initiator" =>  env("MPESA_B2C_INITIATOR_NAME"),
+            "SecurityCredential" =>  env("MPESA_SECURITY_CREDENTIAL"),
+            "CommandID" => "TransactionStatusQuery",
+            "TransactionID" => $request->transactionID,
+            "PartyA" => env("MPESA_SHORTCODE"),
+            "IdentifierType" => "4",
+            "ResultURL" => env("MPESA_TEST_URL") . "/mobile/transaction-status-result",
+            "QueueTimeOutURL" => env("MPESA_TEST_URL") . "/mobile/transaction-status-timeout",
+            "Remarks" => "Checking Transaction Status",
+            "Occasion" => "Christmas"
+        );
+        return $this->makeHttpRequest($url, $body);
     }
 
     private function makeHttpRequest($url, $body)

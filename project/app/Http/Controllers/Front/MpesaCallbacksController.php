@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Front;
 use App\Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class MpesaCallbacksController extends Controller
 {
-    public function receivePayment()
+    public function receivePayment(Request $request)
     {
-        $data = file_get_contents('php://input');
+        $data = $request->getContent();
+        Log::info("MPESA__CALLBACKS");
+        Log::info($data);
         $dataObject = json_decode($data);
         if ($dataObject->Body->stkCallback->ResultCode=="0"){
             $merchantRequestID=$dataObject->Body->stkCallback->MerchantRequestID;
@@ -44,6 +47,13 @@ class MpesaCallbacksController extends Controller
         }else{
             return ["status" => "Processing"];
         }
+    }
+
+    public function manualStatusCheck(Request $request)
+    {
+        $data = $request->getContent();
+        Log::info($data);
+        return $data;
     }
 }
 

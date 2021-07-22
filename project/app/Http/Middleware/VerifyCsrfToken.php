@@ -21,5 +21,7 @@ class VerifyCsrfToken extends Middleware
         '/user/razorpay/notify',
         '/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push',
         '/status/stk-push',
+        '/mobile/transaction-status-timeout',
+        '/mobile/transaction-status-result',
     ];
 }

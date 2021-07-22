@@ -1317,8 +1317,11 @@ Route::get('/package/delete/{id}', 'Vendor\PackageController@destroy')->name('ve
   Route::post('/mobile-payment-submit', 'Front\CheckoutController@makeMobilePayment')->name('mpesa.submit');
 
   //mpesa callbacks and checking status
-  Route::post('/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push',"Front\MpesaCallbacksController@receivePayment");
+  Route::post('/6fc8fca0c81a9d449c4fb555201c0c0b/process',"Front\MpesaCallbacksController@receivePayment");
   Route::post('/status/stk-push',"Front\MpesaCallbacksController@statusCheck");
+  //check transaction status
+  Route::post('/mobile/transaction-status-result',"Front\MpesaCallbacksController@manualStatusCheck");
+  Route::post('/mobile/transaction-status-timeout',"Front\MpesaCallbacksController@manualStatusCheck");
 
 
   // Molly Routes
