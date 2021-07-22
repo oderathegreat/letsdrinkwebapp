@@ -12,8 +12,8 @@ class MpesaCallbacksController extends Controller
     public function receivePayment(Request $request)
     {
         $data = $request->getContent();
-        Log::info("MPESA__CALLBACKS");
-        Log::info($data);
+       // Log::info("MPESA__CALLBACKS");
+        //Log::info($data);
         $dataObject = json_decode($data);
         if ($dataObject->Body->stkCallback->ResultCode==0){
             $merchantRequestID=$dataObject->Body->stkCallback->MerchantRequestID;
@@ -35,7 +35,7 @@ class MpesaCallbacksController extends Controller
                 $payment->update(["transactionDate"=>$transactionDate,"mpesaCode"=>$mpesaCode,"completed"=>true]);
             }
         }
-        return $resultArray=[
+        return [
                 "ResultDesc"=>"Confirmation Service request accepted successfully",
                 "ResultCode"=>"0"
             ];
@@ -55,7 +55,7 @@ class MpesaCallbacksController extends Controller
     public function manualStatusCheck(Request $request)
     {
         $data = $request->getContent();
-        Log::info($data);
+       // Log::info($data);
         return $data;
     }
 }

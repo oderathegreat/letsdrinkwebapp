@@ -108,20 +108,27 @@
 
                                   <div class="row" >
 
-<div class="col-lg-12 pb-2">
+<div class="col-lg-12 pb-2 d-none">
 	
 	{!! $gateway->details !!}
 
 </div>
 
 
-<div class="col-lg-6">
-	<label class="d-none">{{ $langg->lang167 }} *</label>
+<div class="col-lg-8">
+	   <label class="d-none">{{ $langg->lang167 }} *</label>
 	    <input class="form-control d-none" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"/>
-
-    	<label>MPESA Number to pay </label>
-    	<input class="form-control" id="mpesa_phone" name="mpesa_phone" type="tel" placeholder="0723 xxx xxx"  />
-        <button class="btn btn-success" id="mpesa-btn">Initiate Mpesa Payment</button>
+        <div id="mobile-form-payment">
+            <input type="hidden" name="id" value="" id="mobile_transaction_id">
+            <label>MPESA Number to pay </label>
+            <input class="form-control" id="mpesa_phone" name="mpesa_phone" type="tel" value="{{ Auth::guard('web')->check() ? Auth::guard('web')->user()->phone : '' }}" placeholder="0723 xxx xxx"  />
+            <button class="btn btn-success" id="mpesa-btn">Initiate Mpesa Payment</button>
+        </div>
+         <div id="progress-bar-area" class="d-none">
+             <p class="text-center text-info" id="info-prompt">A prompt will appear on your phone, complete the transaction by entering the your PIN</p>
+             <p class="text-center text-small" id="transaction-status">Processing Payment</p>
+             <div id="pb"></div>
+         </div>
 </div>
 
 
@@ -129,6 +136,9 @@
     <script>
         $(function(){
             $('#mpesa-btn').on('click', function () {
+                $('#mobile-form-payment').addClass('d-none');
+                $('#progress-bar-area').removeClass('d-none');
+                $("#final-btn").toggle();
                 var phone =$('#mpesa_phone').val();
                 var total =$('.v-total-cost').data('cost').toLowerCase().replace("kshs","");
                 var shipping =$('#shipping-cost').val();
@@ -139,6 +149,20 @@
                     if(response.data.status==="0"){
                         const merchantRequestID= response.data.merchantRequestID;
                         console.log(merchantRequestID)
+                        $('#mobile_transaction_id').val(merchantRequestID);
+                        let timerId=setInterval(function() {
+                            axios.post('/status/stk-push',{'merchantRequestID':merchantRequestID })
+                            .then((responseCheck)=>{
+                                console.log(responseCheck.data)
+                                if(responseCheck.data.status==="Completed"){
+                                    $("#pb").toggle('slow');
+                                    $("#info-prompt").toggle('slow');
+                                    $("#transaction-status").text('Transaction Completed Successfully');
+                                    $("#final-btn").click();
+                                }
+                            });
+                        }, 4000);
+                        setTimeout(() => { clearInterval(timerId);  }, 15000*4*2);//timeout after two minutes
                     }
                 })
                 .catch((error)=>{
@@ -146,5 +170,16 @@
                 });
             });
         });
+
+        $(document).ready(function () {
+            $("#pb").progressbar({ value: 100 });
+            IndeterminateProgressBar($("#pb"));
+        });
+        function IndeterminateProgressBar(pb) {
+            $(pb).css({ "padding-left": "0%", "padding-right": "90%" });
+            $(pb).progressbar("option", "value", 100);
+            $(pb).animate({ paddingLeft: "90%", paddingRight: "0%" }, 1000, "linear",
+                function () { IndeterminateProgressBar(pb); });
+        }
     </script>
 @endif

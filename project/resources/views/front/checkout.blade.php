@@ -527,7 +527,7 @@
 																	<div class="icon">
 																			<span class="radio"></span>
 																	</div>
-																	<p>
+																	<p>Pesa pos
                                                                           {{--Mobile money--}}
 																			{{ $gt->title }}
 
