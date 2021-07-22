@@ -552,15 +552,14 @@ class CheckoutController extends Controller
 
         $input = $request->all();
 
-        dd($input);
-
-
         $rules = [
             'txn_id4' => 'required',
         ];
 
-       // $payment = Payment::where(["mpesaCode"=>,"phoneNumber"=>])->first();
-
+        $phone=$this->formatPhoneNumber($request->phone);
+        $code=$request->txn_id4;
+        $payment = Payment::where(["mpesaCode"=>$code,"phoneNumber"=>$phone])->first();
+        $transaction_state =$payment==null?"Pending":"Completed";
         $messages = [
             'required' => 'The Transaction ID field is required.',
         ];
@@ -662,7 +661,7 @@ class CheckoutController extends Controller
         $order['coupon_code'] = $request->coupon_code;
         $order['coupon_discount'] = $request->coupon_discount;
         $order['dp'] = $request->dp;
-        $order['payment_status'] = "Pending";
+        $order['payment_status'] = $transaction_state;
         $order['currency_sign'] = $curr->sign;
         $order['currency_value'] = $curr->value;
         $order['vendor_shipping_id'] = $request->vendor_shipping_id;
