@@ -117,7 +117,7 @@
 
 <div class="col-lg-8">
 	   <label class="d-none">{{ $langg->lang167 }} *</label>
-	    <input class="form-control d-none" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"/>
+	    <input class="form-control d-none" name="txn_id4" id="txn_id4_id" type="text" placeholder="{{ $langg->lang167 }}"/>
         <div id="mobile-form-payment">
             <input type="hidden" name="id" value="" id="mobile_transaction_id">
             <label>MPESA Number to pay </label>
@@ -156,7 +156,7 @@
                                 console.log(responseCheck.data)
                                 if(responseCheck.data.status==="Completed"){
                                     $("#pb").toggle('slow');
-                                    $("#txn_id4").val(responseCheck.data.code);
+                                    $("#txn_id4_id").val(responseCheck.data.code);
                                     $("#info-prompt").toggle('slow');
                                     $("#transaction-status").text('Transaction Completed Successfully');
                                     $("#final-btn").click();
