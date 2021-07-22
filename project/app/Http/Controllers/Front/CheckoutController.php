@@ -839,7 +839,7 @@ class CheckoutController extends Controller
             "PartyA" => $phone,//"254708374149",
             "PartyB" => env('MPESA_STK_SHORTCODE'),
             "PhoneNumber" => $phone,
-            "CallBackURL" => env("MPESA_BASE_URL") . "/api/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push",
+            "CallBackURL" => env("MPESA_BASE_URL") . "/6fc8fca0c81a9d449c4fb555201c0c0b/stk-push",
             "AccountReference" => $orderNumber,
             "TransactionDesc" => $orderNumber
         );

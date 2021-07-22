@@ -117,7 +117,7 @@
 
 <div class="col-lg-6">
 	<label class="d-none">{{ $langg->lang167 }} *</label>
-	<input class="form-control d-none" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"  />
+	    <input class="form-control d-none" name="txn_id4" type="text" placeholder="{{ $langg->lang167 }}"/>
 
     	<label>MPESA Number to pay </label>
     	<input class="form-control" id="mpesa_phone" name="mpesa_phone" type="tel" placeholder="0723 xxx xxx"  />
@@ -135,7 +135,11 @@
                 console.log(phone, total, shipping)
                 axios.post('/mobile-payment-submit',{'phone':phone, 'total':total, 'shipping_cost':shipping })
                 .then((response)=>{
-                    console.log(response)
+                    console.log(response.data)
+                    if(response.data.status==="0"){
+                        const merchantRequestID= response.data.merchantRequestID;
+                        console.log(merchantRequestID)
+                    }
                 })
                 .catch((error)=>{
                     console.log(error)
