@@ -55,7 +55,7 @@ class MpesaCallbacksController extends Controller
     public function manualStatusCheck(Request $request)
     {
         $data = $request->getContent();
-       // Log::info($data);
+         Log::info($data);
         return $data;
     }
 }
