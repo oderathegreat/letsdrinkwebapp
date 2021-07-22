@@ -156,7 +156,7 @@
                                 console.log(responseCheck.data)
                                 if(responseCheck.data.status==="Completed"){
                                     $("#pb").toggle('slow');
-                                    $("txn_id4").value(responseCheck.data.code);
+                                    $("#txn_id4").val(responseCheck.data.code);
                                     $("#info-prompt").toggle('slow');
                                     $("#transaction-status").text('Transaction Completed Successfully');
                                     $("#final-btn").click();
