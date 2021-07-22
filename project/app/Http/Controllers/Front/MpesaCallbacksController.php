@@ -15,7 +15,7 @@ class MpesaCallbacksController extends Controller
         Log::info("MPESA__CALLBACKS");
         Log::info($data);
         $dataObject = json_decode($data);
-        if ($dataObject->Body->stkCallback->ResultCode=="0"){
+        if ($dataObject->Body->stkCallback->ResultCode==0){
             $merchantRequestID=$dataObject->Body->stkCallback->MerchantRequestID;
             $checkoutRequestID=$dataObject->Body->stkCallback->CheckoutRequestID;
             $payment = Payment::where(["checkoutRequestID"=>$checkoutRequestID,"merchantRequestID"=>$merchantRequestID])->first();
@@ -32,7 +32,7 @@ class MpesaCallbacksController extends Controller
                 }
             }
             if (!is_null($payment)){
-                $payment->fill(["transactionDate"=>$transactionDate,"mpesaCode"=>$mpesaCode,"completed"=>true]);
+                $payment->update(["transactionDate"=>$transactionDate,"mpesaCode"=>$mpesaCode,"completed"=>true]);
             }
         }
         return $resultArray=[
