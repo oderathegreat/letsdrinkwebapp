@@ -552,11 +552,14 @@ class CheckoutController extends Controller
 
         $input = $request->all();
 
+        dd($input);
+
 
         $rules = [
             'txn_id4' => 'required',
         ];
 
+       // $payment = Payment::where(["mpesaCode"=>,"phoneNumber"=>])->first();
 
         $messages = [
             'required' => 'The Transaction ID field is required.',
