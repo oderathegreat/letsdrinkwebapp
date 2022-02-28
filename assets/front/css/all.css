@@ -5770,6 +5770,7 @@ Logo Header Area Start
     }
     .logo-header .search-box .categori-container {
       position: absolute;
+      visibility: hidden;
       height: 50px;
       width: 160px;
       z-index: 2; }
@@ -5809,6 +5810,7 @@ Logo Header Area Start
       position: relative; }
       .logo-header .search-box .search-form input {
         height: 50px;
+        background: #FFF !IMPORTANT;
         width: 100%;
         border-radius: 0px 50px 50px 0px;
         border: 0px;

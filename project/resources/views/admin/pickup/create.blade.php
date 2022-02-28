@@ -22,6 +22,12 @@
 													<div class="col-lg-7">
 														<input type="text" class="input-field" name="location" placeholder="{{ __('Location') }}" required="" value="">
 													</div>
+
+													<h4 class="heading">Enter Price *</h4>
+
+													<div class="col-lg-7">
+														<input type="text" class="input-field" name="price" placeholder="Estimated Price" required="" value="">
+													</div>
 												</div>
 
 
